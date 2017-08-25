@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+      <div class = "page-header">
+          <h1>{{category.name}}</h1>
+          <h5> <a href = "{{url_for('newItem', category_id = category.id) }}">Create New Item</a></h5>
+          <img src="{{category.image}}" width="240" height="160">
+
+      </div>
+
+      <div class = "flash">
+          {% with messages = get_flashed_messages() %}
+           {% if messages %}
+
+             <ul>
+                {% for message in messages %}
+                  <li> <strong> {{ message }} </strong> </li>
+                {% endfor %}
+            </ul>
+           {% endif %}
+          {% endwith %}
+      </div>
+
+      <div class = "list-group">
+         <ul>
+             {% for i in items %}
+                <li class="list-group-item">
+                    <h3>{{i.name}}</h3>
+                    <p>
+                 	   	<a href="{{url_for('editItem',category_id = category.id, item_id=i.id)}}">Edit</a>
+                 	   	<a href="{{url_for('deleteItem', category_id = category.id, item_id =i.id)}}">Delete</a>
+                 	</p>
+                    <p>
+                        {{i.description}}
+                    </p>
+                    	<img src="{{i.image}}" width="240" height="160">
+                </li>
+          	{% endfor %}
+         </ul>
+      </div>
+{% endblock %}

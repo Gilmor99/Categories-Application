@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+  <div class = "page-header">
+    <h1>Categories</h1>
+  </div>
+
+  <div class = "flash">
+
+    {% with messages = get_flashed_messages() %}
+     {% if messages %}
+       <ul>
+          {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+          {% endfor %}
+      </ul>
+     {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class ="list-group">
+      {% for i in categories %}
+  		<li class = "list-group-item">
+            <p>
+                <a href="{{url_for('categoryList', category_id=i.id)}}"> <h2> {{i.name}}</h2> </a>
+                <a href="{{url_for('categoryList', category_id=i.id)}}"> <img src="{{i.image}}" width="240" height="160"> </a>
+            </p>
+        </li>
+      {% endfor %}
+  </div>
+{% endblock %}
